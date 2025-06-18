@@ -1,10 +1,9 @@
-import Footer from "../organisams/footer";
-import Header from "../organisams/header";
+import { Footer, Header } from "../organisams";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+export default function Index({ children }: { children: React.ReactNode }) {
   return (
     <div>
-        <Header />
+      <Header />
       {children}
       <Footer />
     </div>

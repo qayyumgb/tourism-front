@@ -2,7 +2,7 @@ import { Button, Input } from "antd"
 import { Search, Globe } from "lucide-react"
 import Link from "next/link"
 
-export default function Header() {
+export default function Index() {
   return (
     <header className="w-full bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
