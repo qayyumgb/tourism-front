@@ -1,7 +1,9 @@
-import { HomeTemplate } from "@/components/templates";
+import HomePage from "@/components/pages/home/home"
 
-const Index = () => {
-    return <HomeTemplate />
+const Page = () => {
+    return (
+        <HomePage />
+    )
 }
 
-export default Index;
+export default Page;
