@@ -1,0 +1,7 @@
+:where(.css-dev-only-do-not-override-1261szd).ant-radio-button-wrapper:not(:first-child)::before {
+    display: none;
+}
+
+.hotel-card .ant-card-body {
+    padding: 0 !important;
+}

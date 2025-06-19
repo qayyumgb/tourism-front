@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MainLayout from "@/components/templates/layout";
 
+import '../styles/ant-overlap.css'
+
 
 
 const geistSans = Geist({
