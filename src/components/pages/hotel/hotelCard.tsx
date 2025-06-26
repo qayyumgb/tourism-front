@@ -34,20 +34,20 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       className="overflow-hidden"
       cover={
         <div className="relative">
-          <img 
+          <img
             alt={name}
             src={image}
             className="h-48 w-full object-cover"
           />
           <div className="absolute top-3 right-3 flex space-x-2">
-            <Button 
-              shape="circle" 
-              icon={<SwapOutlined />} 
+            <Button
+              shape="circle"
+              icon={<SwapOutlined />}
               className="bg-white shadow-md"
             />
-            <Button 
-              shape="circle" 
-              icon={<HeartOutlined />} 
+            <Button
+              shape="circle"
+              icon={<HeartOutlined />}
               className="bg-white shadow-md"
             />
           </div>
@@ -60,15 +60,15 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
           )}
         </div>
       }
-      actions={[
-        <Button 
-          type="primary" 
-          className="bg-yellow-400 border-yellow-400 text-black hover:bg-yellow-500 hover:border-yellow-500"
-          block
-        >
-          Book Now
-        </Button>
-      ]}
+    // actions={[
+    //   <Button 
+    //     type="primary" 
+    //     className="bg-yellow-400 border-yellow-400 text-black hover:bg-yellow-500 hover:border-yellow-500 !w-[90%] mx-auto"
+    //     block
+    //   >
+    //     Book Now
+    //   </Button>
+    // ]}
     >
       <div className="space-y-3">
         <div className="flex items-start justify-between">
@@ -79,7 +79,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
             <Text className="text-sm text-gray-500">({reviewCount})</Text>
           </div>
         </div>
-        
+
         <div className="flex items-center text-sm text-gray-600">
           <EnvironmentOutlined className="mr-1" />
           {location}
@@ -95,17 +95,17 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
             <Tag className="text-xs">+{services.length - 3} more</Tag>
           )}
         </div>
-        
+
         <div className="flex items-center justify-between pt-2">
           <div>
             <Text className="text-xs text-gray-500 block">Starting from</Text>
-            <div className="flex items-center space-x-2">
-              <Title level={4} className="m-0 text-green-600">Rs. {price.toLocaleString()}/-</Title>
-              {originalPrice && (
-                <Text delete className="text-sm text-gray-500">Rs. {originalPrice.toLocaleString()}/-</Text>
-              )}
+              <div className="flex items-center space-x-2">
+                <Title level={4} className="m-0 text-green-600">Rs. {price.toLocaleString()}/-</Title>
+                {originalPrice && (
+                  <Text delete className="text-sm text-gray-500">Rs. {originalPrice.toLocaleString()}/-</Text>
+                )}
+              <Text className="text-xs text-gray-500">per night</Text>
             </div>
-            <Text className="text-xs text-gray-500">per night</Text>
           </div>
         </div>
       </div>

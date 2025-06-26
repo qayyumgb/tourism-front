@@ -143,16 +143,22 @@ const HotelPage = () => {
                             {/* Hotel Listings */}
                             <Col xs={24} xl={14}>
                                 <div className="space-y-6">
-                                    {filteredHotels.length > 0 ? (
-                                        filteredHotels.map((hotel) => (
-                                            <HotelCard key={hotel.id} hotel={hotel} />
-                                        ))
-                                    ) : (
-                                        <div className="bg-white p-8 rounded-lg text-center border border-gray-200">
-                                            <Title level={4} className="text-gray-500">No hotels found</Title>
-                                            <p className="text-gray-400">Try adjusting your filters or search criteria</p>
-                                        </div>
-                                    )}
+
+
+                                    <Row gutter={[24, 24]}>
+                                        {filteredHotels.length > 0 ? (
+                                            filteredHotels.map((hotel) => (
+                                                <Col xs={24} key={hotel.id} >
+                                                    <HotelCard hotel={hotel} />
+                                                </Col>
+                                            ))
+                                        ) : (
+                                            <div className="bg-white p-8 rounded-lg text-center border border-gray-200 w-full">
+                                                <Title level={4} className="text-gray-500">No hotels found</Title>
+                                                <p className="text-gray-400">Try adjusting your filters or search criteria</p>
+                                            </div>
+                                        )}
+                                    </Row>
                                 </div>
                             </Col>
 
