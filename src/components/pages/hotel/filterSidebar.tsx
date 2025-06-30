@@ -9,6 +9,8 @@ interface FilterSidebarProps {
     priceRange: [number, number];
     rating: number;
     services: string[];
+    reviewCount: number;
+    // hotelType, roomType, amenities, specialOffers can be added later
   };
   onFilterChange: (filters: any) => void;
   resultCount: number;
@@ -49,16 +51,25 @@ const FilterSidebar = ({ filters, onFilterChange, resultCount }: FilterSidebarPr
     });
   };
 
+  const handleReviewCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value) || 0;
+    onFilterChange({
+      ...filters,
+      reviewCount: value
+    });
+  };
+
   const resetFilters = () => {
     onFilterChange({
-      priceRange: [0, 5000],
+      priceRange: [0, 20000],
       rating: 0,
-      services: []
+      services: [],
+      reviewCount: 0,
     });
   };
 
   return (
-    <div className=" bg-white p-6 space-y-6 border border-gray-200 rounded-lg h-fit">
+    <div className="bg-white p-6 space-y-6 border border-gray-200 rounded-lg h-fit">
       <div className="flex items-center justify-between">
         <Title level={4} className="m-0">Filter</Title>
         <Button 
@@ -67,7 +78,7 @@ const FilterSidebar = ({ filters, onFilterChange, resultCount }: FilterSidebarPr
           onClick={resetFilters}
           className="text-gray-500 hover:text-gray-700"
         >
-          Reset
+          Clear All
         </Button>
       </div>
 
@@ -98,7 +109,7 @@ const FilterSidebar = ({ filters, onFilterChange, resultCount }: FilterSidebarPr
         <Slider
           range
           min={0}
-          max={10000}
+          max={50000}
           step={100}
           value={filters.priceRange}
           onChange={handlePriceChange}
@@ -132,13 +143,26 @@ const FilterSidebar = ({ filters, onFilterChange, resultCount }: FilterSidebarPr
 
       <Divider />
 
-      <Button 
-        type="primary" 
-        className="w-full bg-yellow-400 border-yellow-400 text-black hover:bg-yellow-500 hover:border-yellow-500"
-        size="large"
-      >
-        Apply Filters
-      </Button>
+      {/* Review Count Filter */}
+      <div className="space-y-3">
+        <Title level={5} className="m-0">Minimum Reviews</Title>
+        <input
+          type="number"
+          min={0}
+          value={filters.reviewCount}
+          onChange={handleReviewCountChange}
+          className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
+          placeholder="e.g. 100"
+        />
+        <Text className="text-sm text-gray-600">
+          {filters.reviewCount > 0 ? `${filters.reviewCount}+ reviews` : 'Any review count'}
+        </Text>
+      </div>
+
+      {/* Future filters: hotelType, roomType, amenities, specialOffers */}
+
+      {/* <Divider /> */}
+     
     </div>
   );
 };

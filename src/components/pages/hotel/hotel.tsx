@@ -22,26 +22,29 @@ const MapWithNoSSR = dynamic(() => import('./mapView'), {
 const { Option } = Select;
 const { Title } = Typography;
 
+const initialFilters = {
+    destination: 'islamabad',
+    dates: null,
+    guests: '2-adults-2-children',
+    priceRange: [0, 50000] as [number, number],
+    rating: 0,
+    services: [] as string[],
+    hotelType: '',
+    roomType: '',
+    reviewCount: 0,
+    specialOffers: [] as string[],
+    amenities: [] as string[],
+};
+
 const HotelPage = () => {
-    const [searchFilters, setSearchFilters] = useState({
-        destination: 'islamabad',
-        dates: null,
-        guests: '2-adults-2-children'
-    });
-
-    const [filters, setFilters] = useState({
-        priceRange: [0, 50000] as [number, number],
-        rating: 0,
-        services: [] as string[]
-    });
-
+    const [filters, setFilters] = useState(initialFilters);
     const [sortBy, setSortBy] = useState('rating');
 
     // Filter and sort hotels based on current filters
     const filteredHotels = useMemo(() => {
         let filtered = mockHotels.filter(hotel => {
             // Filter by destination
-            if (searchFilters.destination && hotel.destination !== searchFilters.destination) {
+            if (filters.destination && hotel.destination !== filters.destination) {
                 return false;
             }
 
@@ -65,6 +68,21 @@ const HotelPage = () => {
                 }
             }
 
+            // Filter by review count
+            if (filters.reviewCount > 0 && hotel.reviewCount < filters.reviewCount) {
+                return false;
+            }
+
+            // The following filters are commented out for now as they are not present in Hotel interface or mock data:
+            // hotelType, roomType, specialOffers, amenities, maxGuests
+            // Uncomment and implement when data is available
+            // if (filters.hotelType && hotel.hotelType !== filters.hotelType) return false;
+            // if (filters.roomType && hotel.roomType !== filters.roomType) return false;
+            // if (filters.specialOffers.length > 0) { ... }
+            // if (filters.amenities.length > 0) { ... }
+            // if (filters.guests && hotel.maxGuests && parseInt(filters.guests) > hotel.maxGuests) return false;
+            // if (filters.dates && hotel.availability) { ... }
+
             return true;
         });
 
@@ -85,14 +103,14 @@ const HotelPage = () => {
         });
 
         return filtered;
-    }, [searchFilters, filters, sortBy]);
+    }, [filters, sortBy]);
 
-    const handleSearch = (newSearchFilters: any) => {
-        setSearchFilters(newSearchFilters);
+    const handleSearch = (searchValues: any) => {
+        setFilters(prev => ({ ...prev, ...searchValues }));
     };
 
     const handleFilterChange = (newFilters: any) => {
-        setFilters(newFilters);
+        setFilters(prev => ({ ...prev, ...newFilters }));
     };
 
     return (
@@ -118,7 +136,7 @@ const HotelPage = () => {
                             <Row justify="space-between" align="middle">
                                 <Col>
                                     <Title level={5} className="m-0">
-                                        {filteredHotels.length} Hotels Found in {searchFilters.destination.charAt(0).toUpperCase() + searchFilters.destination.slice(1)}
+                                        {filteredHotels.length} Hotels Found in {filters.destination.charAt(0).toUpperCase() + filters.destination.slice(1)}
                                     </Title>
                                 </Col>
                                 <Col>
